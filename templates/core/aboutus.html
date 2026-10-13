@@ -1,0 +1,42 @@
+<!-- templates/core/aboutus.html -->
+<!-- separate about us page -->
+
+{% extends 'core/base.html' %}
+
+{% block title %}BHOOMI - About Us{% endblock %}
+
+{% block content %}
+
+    <div class="mb-5">
+        <h2>About BHOOMI</h2>
+        <p class="lead">Smart Soil and Crop Monitoring System</p>
+
+        <p>
+            BHOOMI is a smart soil and crop monitoring system built as a final
+            year ECE project. It uses real sensors placed in the soil to read
+            conditions like pH, moisture, nitrogen, phosphorus, potassium,
+            electrical conductivity and soil temperature.
+        </p>
+
+        <p>
+            Based on these readings, combined with the soil type reported by
+            the farmer, BHOOMI compares the actual soil profile against a
+            database of crop requirements and tells the farmer which crops
+            are suitable, and why some crops are not suitable for their
+            current soil condition.
+        </p>
+
+        <h4 class="mt-4">Our Features</h4>
+        <ul>
+            <li><strong>Soil Analyze</strong> - run a quick 3 minute soil test and get crop suitability results</li>
+            <li><strong>Plant Monitoring</strong> - continuously watch a selected crop and get instant alerts if soil conditions go outside the safe range</li>
+        </ul>
+
+        <h4 class="mt-4">Project Details</h4>
+        <p>
+            Final Year ECE Project<br>
+            Dr. Sudhir Chandra Sur Institute of Technology, Kolkata
+        </p>
+    </div>
+
+{% endblock %}

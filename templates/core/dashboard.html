@@ -1,0 +1,228 @@
+<!-- templates/core/dashboard.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}BHOOMI - Home{% endblock %}
+
+{% block content %}
+
+    <!-- hero section -->
+    <div class="text-center bg-success-subtle bg-gradient rounded-4 p-5 mb-4">
+        <span class="badge bg-white text-success border border-success rounded-pill px-3 py-2 mb-3">🌿 Smart Farming Technology</span>
+
+        <h1 class="fw-bold display-5">Know Your Soil.<br><span class="text-success">Grow Smarter.</span></h1>
+
+        <p class="text-muted mx-auto my-3" style="max-width: 550px;">
+            BHOOMI reads real soil data using sensors and tells you exactly which crops will grow best on your land.
+        </p>
+
+        <form method="get" action="{% url 'crop_list' %}" class="d-flex justify-content-center mb-4">
+            <div class="input-group" style="max-width: 480px;">
+                <input type="text" name="crop_name" class="form-control focus-ring focus-ring-success" placeholder="Search crop name (e.g. Rice, Wheat)">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </form>
+
+        <!-- this button changes based on login state -->
+        {% if user.is_authenticated %}
+            <a href="/soil-analyze/" class="btn btn-success rounded-pill px-4 me-2">My Soil Cards</a>
+        {% else %}
+            <a href="/register/" class="btn btn-success rounded-pill px-4 me-2">Get Started</a>
+        {% endif %}
+        <a href="/about-us/" class="btn btn-outline-success rounded-pill px-4">Learn More</a>
+    </div>
+
+    <!-- stats row -->
+    <div class="row text-center border-top border-bottom py-4 mb-5">
+        <div class="col-6 col-md-3">
+            <div class="fs-3 fw-bold text-success">20+</div>
+            <div class="text-muted small">CROPS SUPPORTED</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="fs-3 fw-bold text-success">8+</div>
+            <div class="text-muted small">SOIL PARAMETERS</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="fs-3 fw-bold text-success">
+                <i class="bi bi-stopwatch"></i>
+            </div>
+            <div class="text-muted small">QUICK SOIL TEST</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="fs-3 fw-bold text-success">
+                <i class="bi-tree"></i>
+            </div>
+            <div class="text-muted small">PLANT MONITORING</div>
+        </div>
+    </div>
+
+    <!-- crop images, infinite scrolling strip -->
+    <div class="text-center mb-5">
+        <h3 class="fw-bold mb-4">Crops We Support</h3>
+
+        <div class="scroll-strip-wrapper py-3">
+            <div class="scroll-strip">
+
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1728895604559-a4e16081504e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Rice">
+                    <p class="small fw-semibold mb-0">Rice</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1723530920280-08318eef8c74?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Wheat">
+                    <p class="small fw-semibold mb-0">Wheat</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1649251037566-6881b4956615?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Maize">
+                    <p class="small fw-semibold mb-0">Maize</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1590165482129-1b8b27698780?q=80&w=927&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Potato">
+                    <p class="small fw-semibold mb-0">Potato</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1582284540020-8acbe03f4924?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Tomato</p>
+                </div>
+
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1566842600175-97dca489844f?q=80&w=2564&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Rice">
+                    <p class="small fw-semibold mb-0">Cauliflower</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1613881553903-4543f5f2cac9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Wheat">
+                    <p class="small fw-semibold mb-0">Brinjal</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://plus.unsplash.com/premium_photo-1726138640046-52ff32b8505e?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Maize">
+                    <p class="small fw-semibold mb-0">Chilli</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1590165482129-1b8b27698780?q=80&w=927&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Potato">
+                    <p class="small fw-semibold mb-0">Potato</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1724058663142-e6e1a5e89f2d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Groundnut</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://plus.unsplash.com/premium_photo-1671130295987-13d3b3b4e9dc?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Lentil</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1640958904159-51ae08bd3412?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Cabbage</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1585155113372-6c1808141bf3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Sugarcane</p>
+                </div>
+                <div class="scroll-item text-center">
+                    <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="rounded-circle object-fit-cover border border-success border-2 mb-2" alt="Tomato">
+                    <p class="small fw-semibold mb-0">Onion</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- what you can find here cards -->
+    <div class="mb-5">
+        <h3 class="fw-bold mb-4 border-start border-success border-4 ps-3">What You Can Find Here</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card hover-lift h-100 text-center p-4 shadow-sm border-0">
+                    <div class="fs-2 mb-2">🌍</div>
+                    <h5 class="fw-semibold">Soil Analyze</h5>
+                    <p class="text-muted small">Run a quick 3 minute soil test using our sensors and find out which crops are suitable for your land.</p>
+                    <a href="/login/" class="btn btn-outline-success rounded-pill">Start Analyzing</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card hover-lift h-100 text-center p-4 shadow-sm border-0">
+                    <div class="fs-2 mb-2">🌾</div>
+                    <h5 class="fw-semibold">Plant Monitoring</h5>
+                    <p class="text-muted small">Pick a crop and keep watch on it continuously, with instant alerts if soil conditions go out of range.</p>
+                    <a href="/login/" class="btn btn-outline-primary rounded-pill">Start Monitoring</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- explore by individual crops -->
+    <div class="mb-5">
+        <h3 class="fw-bold mb-4 border-start border-success border-4 ps-3">Explore by Crops</h3>
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1740540230606-8e2033c88e6b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Rice">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">CEREAL</span>
+                        <h6 class="fw-semibold">Rice</h6>
+                        <a href="{% url 'crop_detail' 'Rice' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1723530920280-08318eef8c74?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Wheat">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">CEREAL</span>
+                        <h6 class="fw-semibold">Wheat</h6>
+                        <a href="{% url 'crop_detail' 'Wheat' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1554402100-8d1d9f3dff80?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Maize">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">CEREAL</span>
+                        <h6 class="fw-semibold">Maize</h6>
+                        <a href="{% url 'crop_detail' 'Maize' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1590165482129-1b8b27698780?q=80&w=927&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Potato">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">VEGETABLE</span>
+                        <h6 class="fw-semibold">Potato</h6>
+                        <a href="{% url 'crop_detail' 'Potato' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1582284540020-8acbe03f4924?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Tomato">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">VEGETABLE</span>
+                        <h6 class="fw-semibold">Tomato</h6>
+                        <a href="{% url 'crop_detail' 'Tomato' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card hover-lift h-100 shadow-sm">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Jute_Field_Bangladesh_%287749587518%29.jpg?utm_source=as.wikipedia.org&utm_campaign=index&utm_content=original" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Jute">
+                    <div class="card-body">
+                        <span class="badge bg-success-subtle text-success rounded-pill mb-2">FIBER</span>
+                        <h6 class="fw-semibold">Jute</h6>
+                        <a href="{% url 'crop_detail' 'Jute' %}" class="text-success small fw-semibold text-decoration-none">View Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'crop_list' %}" class="btn btn-outline-success rounded-pill px-4">See All Crops</a>
+        </div>
+    </div>
+
+{% endblock %}
