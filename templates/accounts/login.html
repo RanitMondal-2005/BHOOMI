@@ -1,0 +1,44 @@
+<!-- templates/accounts/login.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}BHOOMI - Login{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card auth-card shadow rounded-4 border-0 p-4 p-md-5 my-5">
+                <h2 class="text-center fw-bold mb-4">Welcome Back</h2>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Invalid username or password. Please try again.
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label class="form-label text-uppercase small fw-bold text-secondary">Username</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-uppercase small fw-bold text-secondary">Password</label>
+                        {{ form.password }}
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg w-100 rounded-3">Login</button>
+                </form>
+
+                <p class="text-center text-muted mt-4 mb-0">
+                    Don't have an account? <a href="/register/" class="text-success fw-semibold text-decoration-none">Register here</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
