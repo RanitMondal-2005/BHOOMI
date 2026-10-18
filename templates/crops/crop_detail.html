@@ -1,0 +1,81 @@
+<!-- templates/crops/crop_detail.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}BHOOMI - {{ crop.crop_name }}{% endblock %}
+
+<!-- ------------------ INDIVIDUAL CROP DETAIL --------------------------- -->
+
+{% block content %}
+    <a href="{% url 'crop_list' %}" class="text-decoration-none">&larr; Back to all crops</a>
+
+    <!-- crop image and name side by side -->
+    <div class="d-flex align-items-center mt-3 mb-1">
+        <img src="{% static 'images/crops/'|add:crop.crop_name|lower|add:'.jpg' %}"
+             alt="{{ crop.crop_name }}"
+             class="rounded-4 me-3"
+             style="width: 100px; height: 100px; object-fit: cover;">
+
+        <div>
+            <h2 class="fw-bold mb-1">{{ crop.crop_name }}</h2>
+            <p class="text-muted mb-0">Suitable soil types: {{ crop.suitable_soil_types }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-light fw-bold">Soil Requirements</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>pH</span>
+                        <span>{{ crop.ph_min }} - {{ crop.ph_max }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Moisture</span>
+                        <span>{{ crop.moisture_min }}% - {{ crop.moisture_max }}%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Nitrogen (N)</span>
+                        <span>{{ crop.nitrogen_min }} - {{ crop.nitrogen_max }} mg/kg</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Phosphorus (P)</span>
+                        <span>{{ crop.phosphorus_min }} - {{ crop.phosphorus_max }} mg/kg</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Potassium (K)</span>
+                        <span>{{ crop.potassium_min }} - {{ crop.potassium_max }} mg/kg</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Electrical Conductivity</span>
+                        <span>{{ crop.ec_min }} - {{ crop.ec_max }} dS/m</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Soil Temperature</span>
+                        <span>{{ crop.soil_temp_min }}&deg;C - {{ crop.soil_temp_max }}&deg;C</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-light fw-bold">Environmental Requirements</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Ambient Temperature</span>
+                        <span>{{ crop.ambient_temp_min }}&deg;C - {{ crop.ambient_temp_max }}&deg;C</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Humidity</span>
+                        <span>{{ crop.humidity_min }}% - {{ crop.humidity_max }}%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

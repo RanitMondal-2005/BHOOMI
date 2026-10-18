@@ -1,0 +1,52 @@
+<!-- templates/crops/crop_list.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}BHOOMI - All Crops{% endblock %}
+
+
+<!-- ------------ MATCHED CROPS FOUND WHEN SEARCHED -------------------- -->
+
+{% block content %}
+
+    <h3 class="fw-bold mb-4">
+        {% if search_query %}
+            Search results for "{{ search_query }}"
+        {% else %}
+            All Supported Crops
+        {% endif %}
+    </h3>
+
+    <a href="{% url 'landing_page' %}" class="text-decoration-none">&larr; Back to Dashboard</a>
+
+    {% if crops %}
+        <div class="row">
+            {% for crop in crops %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex align-items-start  hover-lift">
+
+                            <!-- small logo style image beside the crop name -->
+                            <!-- crop.crop_name|lower builds the filename path automatically -->
+                            <img src="{% static 'images/crops/'|add:crop.crop_name|lower|add:'.jpg' %}" alt="{{ crop.crop_name }}" class="rounded-circle me-3" style="width: 48px; height: 48px; object-fit: cover; flex-shrink: 0;">
+                            <!-- This chains three template filters together: start with 'images/crops/', add the crop’s name, lowercase the whole thing, then add .jpg at the end -->
+                            <div>
+                                <h5 class="card-title mb-1">{{ crop.crop_name }}</h5>
+                                <p class="card-text text-muted small">
+                                    Suitable soil: {{ crop.suitable_soil_types }}
+                                </p>
+                                <a href="{% url 'crop_detail' crop.crop_name %}" class="btn btn-outline-success btn-sm rounded-pill">
+                                    View Details
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No crops found matching your search.</p>
+    {% endif %}
+
+{% endblock %}
