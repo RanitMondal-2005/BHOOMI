@@ -1,0 +1,101 @@
+<!-- templates/devices/device_list.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}BHOOMI - My Devices{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between align-items-center mb-1">
+        <h3 class="fw-bold mb-0">My Devices</h3>
+        {% if devices|length < 3 %}
+            <a href="{% url 'add_device' %}" class="btn btn-success rounded-pill">+ Add Device</a>
+        {% endif %}
+    </div>
+    <a href="{% url 'landing_page' %}" class="text-decoration-none">&larr; Back to Dashboard</a>
+    <div>
+    <p class="text-muted mb-4">{{ devices|length }} of 3 devices registered</p>
+    </div>
+
+    {% if devices %}
+        <div class="row g-3">
+            {% for device in devices %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0  hover-lift">
+
+                        <!-- top strip, color coded according to current mode -->
+                        {% if device.current_mode == 'idle' %}
+                            <div class="bg-secondary-subtle rounded-top" style="height: 6px;"></div>
+                        {% elif device.current_mode == 'soil_analyzing' %}
+                            <div class="bg-success rounded-top" style="height: 6px;"></div>
+                        {% else %}
+                            <div class="bg-primary rounded-top" style="height: 6px;"></div>
+                        {% endif %}
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="fw-bold mb-0">📡 {{ device.device_name }}</h5>
+                                {% if device.current_mode == 'idle' %}
+                                    <span class="badge bg-secondary-subtle text-secondary">Idle</span>
+                                {% elif device.current_mode == 'soil_analyzing' %}
+                                    <span class="badge bg-success-subtle text-success">Analyzing</span>
+                                {% else %}
+                                    <span class="badge bg-primary-subtle text-primary">Monitoring</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- api key shown in a code style box, with a copy button -->
+                            <div class="bg-light rounded-3 p-2 mb-2 d-flex justify-content-between align-items-center">
+                                <code class="small text-truncate" style="max-width: 80%;">{{ device.api_key }}</code>
+                                <button type="button" class="btn btn-sm btn-link p-0 copy-key-btn" data-key="{{ device.api_key }}" title="Copy API key">📋</button>
+                            </div>
+
+                            <p class="text-muted small mb-3">
+                                {% if device.last_seen %}
+                                    Last seen: {{ device.last_seen|date:"d M, g:i A" }}
+                                {% else %}
+                                    Never connected yet
+                                {% endif %}
+                            </p>
+
+                            {% if device.current_mode == 'idle' %}
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="{% url 'start_soil_analyze' device.id %}" class="btn btn-success btn-sm rounded-pill">Start Soil Analyze</a>
+                                    <a href="{% url 'select_crop' device.id %}" class="btn btn-outline-primary btn-sm rounded-pill">Start Plant Monitoring</a>
+                                </div>
+                            {% elif device.current_mode == 'soil_analyzing' %}
+                                <p class="small text-success mb-0">🔬 Currently analyzing soil...</p>
+                            {% else %}
+                                <p class="small text-primary mb-0">🌱 Currently monitoring a crop...</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <a href="{% url 'delete_device' device.id %}" class="text-danger small text-decoration-none" onclick="return confirm('Remove this device?');">Remove Device</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted mb-3">You haven't added any devices yet.</p>
+            <a href="{% url 'add_device' %}" class="btn btn-success rounded-pill">+ Add Your First Device</a>
+        </div>
+    {% endif %}
+
+    <script>
+        // small script to let the farmer copy their api key with one click
+        document.querySelectorAll('.copy-key-btn').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const key = button.getAttribute('data-key');
+                navigator.clipboard.writeText(key);
+                button.innerText = '✅';
+                setTimeout(function () {
+                    button.innerText = '📋';
+                }, 1500);
+            });
+        });
+    </script>
+
+{% endblock %}

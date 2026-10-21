@@ -1,0 +1,31 @@
+<!-- templates/devices/add_device.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}BHOOMI - Add Device{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card auth-card shadow rounded-4 border-0 p-4 p-md-5 my-4">
+                <h2 class="text-center fw-bold mb-4">Add a Device</h2>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label>Device Name</label>
+                        {{ form.device_name }}
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg w-100 rounded-3">Add Device</button>
+                </form>
+                <span>
+                <a href="{% url 'device_list' %}" class="text-decoration-none">&larr; Cancel</a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
