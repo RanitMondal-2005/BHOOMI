@@ -1,0 +1,99 @@
+:root {
+    --bs-success: #16a34a;
+    --bs-success-rgb: 22, 163, 74;
+}
+
+body {
+    font-size: 15px;
+}
+
+/* ---------- infinite scrolling of Crops in Dashboard ---------- */
+
+.scroll-strip-wrapper {
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.scroll-strip {
+    display: flex;
+    width: max-content;
+    gap: 30px;
+    animation: scroll-left 25s linear infinite;
+}
+
+/* pause the scroll when mouse is over it, resume from same spot on mouse out */
+.scroll-strip-wrapper:hover .scroll-strip {
+    animation-play-state: paused;
+}
+
+/* fixed circle size for each crop image, bootstrap has no utility for custom px sizes */
+.scroll-item img {
+    height: 100px;
+    width: 100px;
+    transition: 0.2s;
+}
+
+.scroll-item:hover img {
+    transform: scale(1.08);
+}
+
+@keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ---------- card hover lift ---------- */
+
+.hover-lift {
+    transition: 0.2s;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(19, 143, 64, 0.15) !important;
+    border-color: var(--bs-success) !important;
+}
+
+/* ---------- login / register form styling ---------- */
+
+.auth-card h2 {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+.auth-card label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background-color: #f9fafb;
+    font-size: 0.95rem;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: var(--bs-success);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.auth-card button[type="submit"] {
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+}
